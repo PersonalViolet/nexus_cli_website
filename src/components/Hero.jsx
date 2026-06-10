@@ -47,7 +47,7 @@ function NetworkNodes() {
         <path
           key={`conn-${i}`}
           d={d}
-          stroke="rgba(139,124,246,0.12)"
+          stroke="var(--color-network-line)"
           strokeWidth="1"
           fill="none"
           style={{
@@ -63,7 +63,7 @@ function NetworkNodes() {
           cx={n.cx}
           cy={n.cy}
           r={n.r}
-          fill="rgba(139,124,246,0.5)"
+          fill="var(--color-network-node)"
           style={{ animation: `pulse-node 3s ease-in-out ${n.delay}s infinite` }}
         />
       ))}

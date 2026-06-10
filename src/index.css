@@ -13,10 +13,29 @@
   --color-text-secondary: #8e8ca0;
   --color-text-muted: #5c5a6e;
   --color-border: #1e1c36;
+  --color-network-line: rgba(139, 124, 246, 0.12);
+  --color-network-node: rgba(139, 124, 246, 0.5);
 
   --font-display: "Plus Jakarta Sans", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+}
+
+:root.light {
+  --color-bg-primary: #f8f7ff;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f0eff8;
+  --color-accent: #6d5df0;
+  --color-accent-glow: #7c6ff7;
+  --color-accent-subtle: rgba(109, 93, 240, 0.1);
+  --color-accent-border: rgba(109, 93, 240, 0.3);
+  --color-success: #10b981;
+  --color-text-primary: #1a1730;
+  --color-text-secondary: #5c5a70;
+  --color-text-muted: #8e8ca0;
+  --color-border: #e0dff0;
+  --color-network-line: rgba(109, 93, 240, 0.1);
+  --color-network-node: rgba(109, 93, 240, 0.4);
 }
 
 * {
