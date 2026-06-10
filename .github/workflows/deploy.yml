@@ -14,3 +14,16 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
+      - name: Push to gh-pages
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist
+          git init
+          git checkout -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "deploy"
+          git remote add origin "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push -f origin gh-pages
