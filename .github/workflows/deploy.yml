@@ -1,44 +1,29 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
     branches: [master]
-
-permissions:
-  contents: write
-  administration: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-
       - run: npm ci
       - run: npm run build
-
-      - name: Push to gh-pages
+      - name: Deploy to gh-pages
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd dist
           git init
           git checkout -b gh-pages
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "actions@github.com"
           git add .
-          git commit -m "Deploy $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git commit -m "deploy"
+          git remote add origin "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push -f origin gh-pages
-
-      - name: Enable Pages
-        run: |
-          curl -s -X PUT \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "Content-Type: application/json" \
-            https://api.github.com/repos/${{ github.repository }}/pages \
-            --data-raw '{"source":{"branch":"gh-pages","path":"/"}}'
